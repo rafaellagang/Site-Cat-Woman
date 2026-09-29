@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="stylelogin.css">
+</head>
+
+<body>
+
+    <nav class="menu">
+        <a href="index.html" class="link-menu">Home</a>
+        <a href="galeria.html" class="link-menu">Galeria</a>
+        <a href="chat.html" class="link-menu">Chat</a>
+        <a href="cadastro.html" class="link-menu">Cadastro</a>
+        <a href="login.html" class="link-menu">Login</a>
+    </nav>
+
+    <h1 class="titulo">Login</h1>
+
+    <main class="container">
+
+    <div class="campo-grupo">   
+    <label for="loginEmail" class="h2">E-mail</label><br>
+    <input type="email" id="loginEmail" placeholder="Digite seu e-mail"><br><br>
+    </div> 
+
+    <div class="campo-grupo">   
+    <label for="loginSenha" class="h2">Senha</label><br>
+    <input type="password" id="loginSenha" placeholder="Digite sua senha"><br><br>
+    </div>
+
+    <button id="btnLogin" class="btn-enviar">Enviar</button>
+    <div id="loginMensagem" class="container-resposta"></div>
+
+</main>
+
+    <script>
+
+        const btnLogin = document.querySelector('#btnLogin')
+        const btnMensagem = document.querySelector('#loginMensagem')
+
+        btnLogin.addEventListener('click', async () => {
+            const emailEntrada = document.querySelector('#loginEmail');
+            const senhaEntrada = document.querySelector('#loginSenha');
+
+            const emailDigitado = emailEntrada.value;
+            const senhaDigitada = senhaEntrada.value
+
+            if (!emailDigitado || !senhaDigitada) {
+                loginMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+                loginMensagem.style.color = 'red';
+                return;
+            }
+
+            loginMensagem.innerText = 'Aguarde 4 segundos, logando no servidor...';
+            loginMensagem.style.color = 'green';
+
+            try {
+                const respostaBe = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBe.json();
+
+                if (!respostaBe.ok) {
+                    loginMensagem.innerText = `${dados.erro}`;
+                    loginMensagem.style.color = 'red';
+                    return;
+                }
+
+                loginMensagem.innerText = `${dados.mensagem}: ${dados.usuario} entrando no chat...`;
+                loginMensagem.style.color = 'green';
+
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                loginMensagem.innerText = 'Erro ao conectar com o servidor!!';
+                loginMensagem.style.color = 'red';
+            }
+        })
+
+
+    </script>
+    <footer>&copy; Desenvolvido por Rafaella - 2026 - Curitiba</footer>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Eagle+Lake&family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Eagle+Lake&family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Limelight&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo-escuro: #111116;       
+    --fundo-card: #1b1b22;         
+    --texto-claro: #f5f5f7;        
+    --roxo-gotham: #9d4edd;       
+    --roxo-brilho: #e0aaff;        
+    --ouro-destaque: #ffb703;      
+    --transicao: 0.3s ease;
+}
+
+body {
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+    font-family: 'Chelsea Market', system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.titulo {
+    font-family: 'Limelight', cursive;
+    font-size: 1.5rem;
+    color: var(--ouro-destaque);
+    text-align: center;
+    letter-spacing: 2px;
+    margin: 70px 0 70px 0;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    background-color: rgba(17, 17, 22, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Limelight', cursive;
+    font-size: 30px;
+    letter-spacing: 2px;
+    z-index: 10;
+    border-bottom: 2px solid var(--roxo-gotham);
+}
+
+.menu .link-menu {
+    color: var(--texto-claro);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2rem;
+    transition: var(--transicao);
+}
+
+.menu .link-menu:hover {
+    color: var(--ouro-destaque);
+    text-shadow: 0 0 8px var(--ouro-destaque);
+}
+
+.container-chat {
+    width: 100%;
+    height: 350px;
+    max-width: 500px;
+    margin: 10px auto 40px;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: var(--fundo-card);
+    border: 2px solid rgba(157, 78, 221, 0.3);
+    box-shadow: 0 10px 30px rgba(157, 78, 221, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mensagem {
+    width: 100%;
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    border: 2px solid var(--roxo-gotham);
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.2);
+}
+
+.formulario-envio {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.formulario-envio input {
+    flex: 1;
+    padding: 14px;
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+    border: 1px solid rgba(157, 78, 221, 0.4);
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    font-family: 'Chelsea Market', sans-serif;
+    transition: var(--transicao);
+}
+
+.formulario-envio input::placeholder {
+    color: #666;
+}
+
+.formulario-envio input:focus {
+    border-color: var(--roxo-brilho);
+    box-shadow: 0 0 10px rgba(224, 170, 255, 0.3);
+}
+
+.formulario-envio button {
+    background-color: var(--ouro-destaque);
+    color: #111116;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Limelight', cursive;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: var(--transicao), transform 0.2s;
+}
+
+.formulario-envio button:hover {
+    background-color: var(--roxo-gotham);
+    color: var(--texto-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--roxo-gotham);
+}
+
+.formulario-envio button:active {
+    transform: scale(0.98);
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-size: 0.9rem;
+    background-color: var(--fundo-escuro);
+    border-top: 1px solid #222;
+}

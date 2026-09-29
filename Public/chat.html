@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="stylechat.css">
+</head>
+
+<body>
+
+    <nav class="menu">
+        <a href="index.html" class="link-menu">Home</a>
+        <a href="galeria.html" class="link-menu">Galeria</a>
+        <a href="chat.html" class="link-menu">Chat</a>
+        <a href="cadastro.html" class="link-menu">Cadastro</a>
+        <a href="login.html" class="link-menu">Login</a>
+    </nav>
+
+    <h1 id="boasVindas" class="titulo">Chat</h1>
+
+    <div class="container-chat">
+        <div class="mensagem">
+            A noite não espera, escreva logo sua mensagem!
+        </div>
+        <div id="caixaChat"></div>
+
+        <div id="inputArea" class="formulario-envio">
+            <input type="text" id="mensagem" placeholder="Digite aqui" required>
+            <button id="btnEnviar" type="text">Enviar</button>
+        </div>
+    </div>
+    <script>
+        const usuarioLogado = 'Cristal'
+        document.querySelector('#boasVindas').textContent = `${usuarioLogado}, Seja bem-vindo ao chat da Mulher Gato!`;
+
+        const caixaChat = document.querySelector('#caixaChat');
+        const inputMensagem = document.querySelector('#mensagem');
+        const btnEnviar = document.querySelector('#btnEnviar');
+
+        const historicoConversa = []
+
+        function mensagemTela(autor, texto) {
+            const textoFinal = document.createElement('p');
+            textoFinal.className = 'msg';
+            textoFinal.textContent = `${autor}, ${texto}`;
+            caixaChat.appendChild(textoFinal);
+        }
+
+        btnEnviar.addEventListener('click', async () => {
+            const textoMensagem = inputMensagem.value
+
+            if (!textoMensagem) return
+
+            mensagemTela(usuarioLogado, textoMensagem);
+            historicoConversa.push({ role: "user", content: textoMensagem });
+
+            inputMensagem.value = '';
+            btnEnviar.disabled = true
+
+
+            try {
+                const respostaServidor = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ historico: historicoConversa })
+                })
+
+                const dados = await respostaServidor.json()
+
+                if(!respostaServidor.ok) {
+                    mensagemTela('system', dados.erro)
+                    return
+                }
+
+                mensagemTela('Mulher Gato', dados.resposta)
+
+            }
+
+            catch (erro) {
+                mensagemTela('system', 'Erro ao conectar com o servidor.');
+            }
+
+            finally {
+                btnEnviar.disabled = false
+
+
+            }
+        })
+
+    </script>
+    <footer>&copy; Desenvolvido por Rafaella - 2026 - Curitiba</footer>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="stylecadastro.css">
+</head>
+
+<body>
+    <nav class="menu">
+        <a href="index.html" class="link-menu">Home</a>
+        <a href="galeria.html" class="link-menu">Galeria</a>
+        <a href="chat.html" class="link-menu">Chat</a>
+        <a href="cadastro.html" class="link-menu">Cadastro</a>
+        <a href="login.html" class="link-menu">Login</a>
+    </nav>
+
+    <h1 class="titulo">Cadastro</h1>
+
+    <main class="container">
+        
+        <div class="campo-grupo">
+            <label for="cadUsuario" class="h2">Nome do usuário</label>
+            <input type="text" id="cadUsuario" placeholder="Digite seu nome">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="cadEmail" class="h2">E-mail</label>
+            <input type="email" id="cadEmail" placeholder="Digite seu e-mail">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="cadSenha" class="h2">Senha</label>
+            <input type="password" id="cadSenha" placeholder="Digite sua senha">
+        </div>
+
+        <button id="btnCadastro" class="btn-enviar">Enviar</button>
+        <div id="cadMensagem" class="container-resposta"></div>
+
+    </main>
+
+    <script>
+        const btnCadastro = document.querySelector('#btnCadastro')
+        const btnMensagem = document.querySelector('#cadMensagem')
+
+        btnCadastro.addEventListener('click', async () => {
+            const usuarioEntrada = document.querySelector('#cadUsuario');
+            const emailEntrada = document.querySelector('#cadEmail');
+            const senhaEntrada = document.querySelector('#cadSenha')
+
+            const usuarioDigitado = usuarioEntrada.value;
+            const emailDigitado = emailEntrada.value;
+            const senhaDigitada = senhaEntrada.value
+
+            if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
+                cadMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+                cadMensagem.style.color = 'red';
+                return;
+            }
+
+            cadMensagem.innerText = 'Aguarde 4 segundos, cadastrando no servidor...';
+            cadMensagem.style.color = 'green';
+
+            try {
+                const respostaBe = await fetch('http://localhost:3000/cadastro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        usuario: usuarioDigitado,
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBe.json();
+
+                if (!respostaBe.ok) {
+                    cadMensagem.innerText = `${dados.erro}`;
+                    cadMensagem.style.color = 'red';
+                    return;
+                }
+
+                cadMensagem.innerText = `${dados.mensagem}: ${dados.PERFIL}`;
+                cadMensagem.style.color = 'green';
+
+                usuarioEntrada.value = '';
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                cadMensagem.innerText = 'Erro ao conectar com o servidor!!';
+                cadMensagem.style.color = 'red';
+            }
+        })
+    </script>
+    <footer>&copy; Desenvolvido por Rafaella - 2026 - Curitiba</footer>
+</body>
+
+</html>
