@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Eagle+Lake&family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Eagle+Lake&family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Limelight&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo-escuro: #111116;       
+    --fundo-card: #1b1b22;         
+    --texto-claro: #f5f5f7;        
+    --roxo-gotham: #9d4edd;       
+    --roxo-brilho: #e0aaff;        
+    --ouro-destaque: #ffb703;      
+    --transicao: 0.3s ease;
+}
+
+body {
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+    font-family: 'Chelsea Market', system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    background-color: rgba(17, 17, 22, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Limelight', cursive;
+    font-size: 30px;
+    letter-spacing: 2px;
+    z-index: 10;
+    border-bottom: 2px solid var(--roxo-gotham);
+}
+
+.menu .link-menu {
+    color: var(--texto-claro);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2rem;
+    transition: var(--transicao);
+}
+
+.menu .link-menu:hover {
+    color: var(--ouro-destaque);
+    text-shadow: 0 0 8px var(--ouro-destaque);
+}
+.titulo {
+    font-family: 'Limelight', cursive;
+    font-size: 2.6rem;
+    color: var(--texto-claro);
+    text-align: center;
+    letter-spacing: 6px;
+    margin: 40px 0 20px 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto 60px auto;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: var(--fundo-card);
+    border: 2px solid rgba(157, 78, 221, 0.3);
+    box-shadow: 0 10px 30px rgba(157, 78, 221, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+  
+}
+
+.h2 {
+    color: var(--roxo-brilho);
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.container input {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--fundo-escuro);
+    color: var(--texto-claro);
+    border: 1px solid rgba(157, 78, 221, 0.4);
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    font-family: 'Chelsea Market', sans-serif;
+    transition: var(--transicao);
+}
+
+.container input::placeholder {
+    color: #666;
+}
+
+.btn-enviar {
+    width: 100%;
+    background-color: var(--ouro-destaque);
+    color: #111116;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Limelight', cursive;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    transition: var(--transicao), transform 0.2s;
+}
+
+.btn-enviar:hover {
+    background-color: var(--roxo-gotham);
+    color: var(--texto-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--roxo-gotham);
+}
+
+.btn-enviar:active {
+    transform: scale(0.98);
+}
+
+.container-resposta {
+    font-size: 0.95rem;
+    text-align: center;
+    min-height: 20px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-size: 0.9rem;
+    background-color: var(--fundo-escuro);
+    border-top: 1px solid #222;
+}
