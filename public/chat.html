@@ -32,7 +32,14 @@
         </div>
     </div>
     <script>
-        const usuarioLogado = 'Cristal'
+        
+        if (!usuarioLogado){
+            alert('Você precisa se cadastrar para acessar o chat.');
+            window.location.href = 'cadastro.html';
+        }
+        localStorage.setItem('usuarioLogado', dados.usuario);
+        
+        const usuarioLogado = 'Usuário';
         document.querySelector('#boasVindas').textContent = `${usuarioLogado}, Seja bem-vindo ao chat da Mulher Gato!`;
 
         const caixaChat = document.querySelector('#caixaChat');
