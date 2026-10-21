@@ -41,61 +41,66 @@
 
     </main>
 
-    <script>
-        const btnCadastro = document.querySelector('#btnCadastro')
-        const btnMensagem = document.querySelector('#cadMensagem')
+<script>
+    const btnCadastro = document.querySelector('#btnCadastro')
+    const cadMensagem = document.querySelector('#cadMensagem')
 
-        btnCadastro.addEventListener('click', async () => {
-            const usuarioEntrada = document.querySelector('#cadUsuario');
-            const emailEntrada = document.querySelector('#cadEmail');
-            const senhaEntrada = document.querySelector('#cadSenha')
+    btnCadastro.addEventListener('click', async () => {
+        const usuarioEntrada = document.querySelector('#cadUsuario');
+        const emailEntrada = document.querySelector('#cadEmail');
+        const senhaEntrada = document.querySelector('#cadSenha')
 
-            const usuarioDigitado = usuarioEntrada.value;
-            const emailDigitado = emailEntrada.value;
-            const senhaDigitada = senhaEntrada.value
+        const usuarioDigitado = usuarioEntrada.value;
+        const emailDigitado = emailEntrada.value;
+        const senhaDigitada = senhaEntrada.value
 
-            if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
-                cadMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+        if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
+            cadMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+            cadMensagem.style.color = 'red';
+            return;
+        }
+
+        cadMensagem.innerText = 'Aguarde 4 segundos, cadastrando no servidor...';
+        cadMensagem.style.color = 'green';
+
+        try {
+            const respostaBe = await fetch('/cadastro', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    usuario: usuarioDigitado,
+                    email: emailDigitado,
+                    senha: senhaDigitada
+                })
+            });
+
+            const dados = await respostaBe.json();
+
+            if (!respostaBe.ok) {
+                cadMensagem.innerText = `${dados.erro}`;
                 cadMensagem.style.color = 'red';
                 return;
             }
 
-            cadMensagem.innerText = 'Aguarde 4 segundos, cadastrando no servidor...';
+            cadMensagem.innerText = 'Cadastro realizado com sucesso! Redirecionando para o login...';
             cadMensagem.style.color = 'green';
 
-            try {
-                const respostaBe = await fetch('/cadastro', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        usuario: usuarioDigitado,
-                        email: emailDigitado,
-                        senha: senhaDigitada
-                    })
-                });
+            usuarioEntrada.value = '';
+            emailEntrada.value = '';
+            senhaEntrada.value = '';
 
-                const dados = await respostaBe.json();
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
 
-                if (!respostaBe.ok) {
-                    cadMensagem.innerText = `${dados.erro}`;
-                    cadMensagem.style.color = 'red';
-                    return;
-                }
+        } catch (erro) {
+            console.error('Erro na requisição:', erro);
+            cadMensagem.innerText = 'Erro ao conectar com o servidor!!';
+            cadMensagem.style.color = 'red';
+        }
+    })
+</script>
 
-                cadMensagem.innerText = `${dados.mensagem}: ${dados.PERFIL}`;
-                cadMensagem.style.color = 'green';
-
-                usuarioEntrada.value = '';
-                emailEntrada.value = '';
-                senhaEntrada.value = '';
-
-            } catch (erro) {
-                console.error('Erro na requisição:', erro);
-                cadMensagem.innerText = 'Erro ao conectar com o servidor!!';
-                cadMensagem.style.color = 'red';
-            }
-        })
-    </script>
     <footer>&copy; Desenvolvido por Rafaella - 2026 - Curitiba</footer>
 </body>
 
