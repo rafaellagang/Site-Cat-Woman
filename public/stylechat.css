@@ -34,6 +34,8 @@ body {
     text-align: center;
     letter-spacing: 2px;
     margin: 70px 0 70px 0;
+    max-width: 90%;
+    align-self: center;
 }
 
 .menu {
@@ -64,9 +66,9 @@ body {
 }
 
 .container-chat {
-    width: 100%;
+    width: 90%;
     height: 350px;
-    max-width: 500px;
+    max-width: 450px;
     margin: 10px auto 40px;
     padding: 20px;
     border-radius: 16px;
@@ -151,4 +153,14 @@ footer {
     font-size: 0.9rem;
     background-color: var(--fundo-escuro);
     border-top: 1px solid #222;
+}
+
+
+@media (max-width: 768px) {
+.container-chat, .outros-container {
+display: flex !important;
+flex-direction: column !important;
+align-items: center !important;
+max-width: 90% !important;
+}
 }

@@ -47,7 +47,7 @@ body {
     text-shadow: 0 0 8px var(--ouro-destaque);
 }
 
-.catwoman {
+.outros-container {
     display: flex;              
     flex-direction: row;
     justify-content: space-between; 
@@ -64,15 +64,15 @@ body {
 .esquerdo {
     width: 35%;
     text-align: center;
-    height: 400px;
+    height: 100%;
     padding: 20px;
 }
 
 .cat-titulo {
     font-family: 'Limelight', cursive;
-    font-size: 5.5rem;
+    font-size: 4rem;
     color: var(--texto-claro);
-    margin: 0;
+    margin: 0px;
     letter-spacing: 10px;
     text-shadow: 4px 4px 0px var(--roxo-gotham);
 }
@@ -80,8 +80,8 @@ body {
 .cat-subtitulo {
     color: var(--roxo-brilho);
     font-size: 1.2rem;
-    max-width: 600px;
-    margin: 15px 0 30px 0;
+    max-width: 100%;
+    margin: 60px 0 30px 0;
 }
 
 .catwoman-front {
@@ -90,7 +90,7 @@ body {
     left: 50%;          
     transform: translateX(-50%); 
     height: 90%;       
-    max-height: 700px;
+    max-height: 100%;
     z-index: 1;         
     filter: drop-shadow(0px 15px 15px #000); 
 }
@@ -100,7 +100,7 @@ body {
     flex-direction: column;
     width: 35%;
     text-align: center;
-    height: 400px;
+    height: 100%;
     padding: 10px;
     gap: 100px;
     align-items: center;
@@ -111,18 +111,14 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 30px;
-    background: var(--fundo-escuro);
     color: var(--texto-claro);
     padding: 18px 28px;
     border-radius: 30px;
     font-weight: bold;
-    width: 350px;
+    width: 100%;
     font-size: 1.15rem;
-    border: 3px solid var(--roxo-gotham);
-    box-shadow: 0px 0px 15px var(--roxo-gotham);
-    transform: rotate(-3deg);
-    transition: var(--transicao);
+    margin: -60px auto;
+
 }
 
 .btn-principal {
@@ -132,13 +128,14 @@ body {
     font-size: 1.4rem;
     padding: 12px 35px;
     border: none;
-    border-radius: 8px;
+    border-radius: 9px;
     cursor: pointer;
     text-decoration: none;
     letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(255, 183, 3, 0.4);
     transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    width: 250px;
+
+    
 }
 
 .btn-principal:hover {
@@ -154,7 +151,7 @@ body {
 
 .container-principal {
     padding: 60px 20px;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -214,4 +211,19 @@ footer {
     font-size: 0.9rem;
     background-color: var(--fundo-escuro);
     border-top: 1px solid #222;
+}
+
+
+@media (max-width: 768px) {
+.container-principal, .outros-container, h1, menu {
+display: flex !important;
+flex-direction: column !important;
+align-items: center !important;
+.container-principal, .bloco-balao, .card, img {
+max-width: 90% !important;
+width: 100% !important;
+height: auto !important;
+margin: 15px 0 !important;
+transform: none !important; }
+}
 }
