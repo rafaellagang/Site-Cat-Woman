@@ -32,11 +32,11 @@
         </div>
     </div>
 <script>
-    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    const usuarioLogado = sessionStorage.getItem('usuarioLogado');
 
     if (!usuarioLogado) {
-        alert('Acesso negado! Você precisa estar cadastrado e logado para acessar o chat.');
-        window.location.href = 'login.html';
+        alert('Acesso negado! Você precisa se cadastrar e logar para acessar o chat.');
+        window.location.href = 'cadastro.html';
     }
 
     document.querySelector('#boasVindas').textContent = `${usuarioLogado}, Seja bem-vindo ao chat da Mulher Gato!`;
@@ -90,6 +90,7 @@
         }
     });
 </script>
+
 
     <footer>&copy; Desenvolvido por Rafaella - 2026 - Curitiba</footer>
 </body>
