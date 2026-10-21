@@ -38,6 +38,8 @@
 </main>
 
 <script>
+    localStorage.removeItem('usuarioLogado');
+
     const btnLogin = document.querySelector('#btnLogin');
     const loginMensagem = document.querySelector('#loginMensagem');
 
@@ -72,7 +74,14 @@
                 return;
             }
 
-            const nomeUsuario = dados.usuario || dados.PERFIL || 'Usuário';
+            const nomeUsuario = dados.usuario || dados.PERFIL;
+            
+            if (!nomeUsuario) {
+                loginMensagem.innerText = 'Erro ao obter nome do usuário do servidor.';
+                loginMensagem.style.color = 'red';
+                return;
+            }
+
             localStorage.setItem('usuarioLogado', nomeUsuario);
 
             loginMensagem.innerText = 'Login realizado com sucesso! Redirecionando...';
@@ -89,6 +98,7 @@
         }
     });
 </script>
+
 
 
     <footer>&copy; Desenvolvido por Rafaella - 2026 - Curitiba</footer>
