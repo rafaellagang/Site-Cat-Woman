@@ -215,15 +215,23 @@ footer {
 
 
 @media (max-width: 768px) {
-.container-principal, .outros-container, h1, menu {
+.container-principal, .outros-container, h1, menu{
 display: flex !important;
 flex-direction: column !important;
-align-items: center !important;
+align-items: center !important; }
 .container-principal, .bloco-balao, .card, img {
 max-width: 90% !important;
 width: 100% !important;
 height: auto !important;
 margin: 15px 0 !important;
 transform: none !important; }
+.cat-subtitulo {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 300% !important;
+        max-width: 700px !important;
+        margin-left: -115px !important;
+
+
 }
 }

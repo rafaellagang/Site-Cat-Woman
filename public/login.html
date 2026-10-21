@@ -37,64 +37,60 @@
 
 </main>
 
-    <script>
+<script>
+    const btnLogin = document.querySelector('#btnLogin');
+    const loginMensagem = document.querySelector('#loginMensagem');
 
-        const btnLogin = document.querySelector('#btnLogin')
-        const btnMensagem = document.querySelector('#loginMensagem')
+    btnLogin.addEventListener('click', async () => {
+        const emailEntrada = document.querySelector('#loginEmail');
+        const senhaEntrada = document.querySelector('#loginSenha');
 
-        btnLogin.addEventListener('click', async () => {
-            const emailEntrada = document.querySelector('#loginEmail');
-            const senhaEntrada = document.querySelector('#loginSenha');
+        const emailDigitado = emailEntrada.value;
+        const senhaDigitada = senhaEntrada.value;
 
-            const emailDigitado = emailEntrada.value;
-            const senhaDigitada = senhaEntrada.value
+        if (!emailDigitado || !senhaDigitada) {
+            loginMensagem.innerText = 'Preencha todos os campos!';
+            loginMensagem.style.color = 'red';
+            return;
+        }
 
-            if (!emailDigitado || !senhaDigitada) {
-                loginMensagem.innerText = 'Preencha todos os campos antes de enviar!';
+        try {
+            const respostaBe = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: emailDigitado,
+                    senha: senhaDigitada
+                })
+            });
+
+            const dados = await respostaBe.json();
+
+            if (!respostaBe.ok) {
+                loginMensagem.innerText = `${dados.erro}`;
                 loginMensagem.style.color = 'red';
                 return;
             }
 
-            loginMensagem.innerText = 'Aguarde 4 segundos, logando no servidor...';
+            const nomeUsuario = dados.usuario || dados.PERFIL || 'Usuário';
+            localStorage.setItem('usuarioLogado', nomeUsuario);
+
+            loginMensagem.innerText = 'Login realizado com sucesso! Redirecionando...';
             loginMensagem.style.color = 'green';
 
-            try {
-                const respostaBe = await fetch('/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: emailDigitado,
-                        senha: senhaDigitada
-                    })
-                });
+            setTimeout(() => {
+                window.location.href = 'chat.html';
+            }, 1500);
 
-                const dados = await respostaBe.json();
-
-                if (!respostaBe.ok) {
-                    loginMensagem.innerText = `${dados.erro}`;
-                    loginMensagem.style.color = 'red';
-                    return;
-                }
-
-                loginMensagem.innerText = `${dados.mensagem}: ${dados.usuario} entrando no chat...`;
-                loginMensagem.style.color = 'green';
-
-                emailEntrada.value = '';
-                senhaEntrada.value = '';
-
-                setTimeout(() => {
-                    window.location.href = 'chat.html';
-                }, 1000);
-
-            } catch (erro) {
-                console.error('Erro na requisição:', erro);
-                loginMensagem.innerText = 'Erro ao conectar com o servidor!!';
-                loginMensagem.style.color = 'red';
-            }
-        })
+        } catch (erro) {
+            console.error('Erro na requisição:', erro);
+            loginMensagem.innerText = 'Erro ao conectar com o servidor!';
+            loginMensagem.style.color = 'red';
+        }
+    });
+</script>
 
 
-    </script>
     <footer>&copy; Desenvolvido por Rafaella - 2026 - Curitiba</footer>
 </body>
 
