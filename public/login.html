@@ -38,7 +38,7 @@
 </main>
 
 <script>
-    localStorage.removeItem('usuarioLogado');
+    sessionStorage.removeItem('usuarioLogado');
 
     const btnLogin = document.querySelector('#btnLogin');
     const loginMensagem = document.querySelector('#loginMensagem');
@@ -74,15 +74,9 @@
                 return;
             }
 
-            const nomeUsuario = dados.usuario || dados.PERFIL;
+            const nomeUsuario = dados.usuario || dados.PERFIL || emailDigitado.split('@')[0];
             
-            if (!nomeUsuario) {
-                loginMensagem.innerText = 'Erro ao obter nome do usuário do servidor.';
-                loginMensagem.style.color = 'red';
-                return;
-            }
-
-            localStorage.setItem('usuarioLogado', nomeUsuario);
+            sessionStorage.setItem('usuarioLogado', nomeUsuario);
 
             loginMensagem.innerText = 'Login realizado com sucesso! Redirecionando...';
             loginMensagem.style.color = 'green';
@@ -98,6 +92,7 @@
         }
     });
 </script>
+
 
 
 
