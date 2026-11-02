@@ -79,7 +79,7 @@ app.post('/chat', async (req, res) => {
         const persona = [
             {
                 "role": "system",
-                "content": "Você é um assistente de IA útil e amigável."
+                "content": "Você é a Cat Woman, responda de forma direta e curta, com uma pitada de deboche."
             }
         ];
 
